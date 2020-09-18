@@ -1,4 +1,4 @@
-# web-toy-store
+# Web Toy Store Application
 A web toy store application built with Python and Django 
 
 Homework project for COSC140 - Developing Web Applications at Colgate University.
