@@ -1,0 +1,25 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Vandelay Industries Toystore </title>
+    <link rel="stylesheet" href="{% static "products.css" %}">
+  </head>
+  <body>
+    <header>
+      <h1>{% block title %} Vandelay Industries Toystore {% endblock title %}</h1>
+      <div>
+          {% if user.is_authenticated %}
+              <p>Welcome, {{user.username}}. <a href="{% url 'logout' %}?next={{request.path}}">Log out.</a></p>
+          {% else %}
+              <p>Welcome, anonymous user. <a href="{% url 'login' %}?next={{request.path}}">Log in.</a></p>
+          {% endif %} 
+        </div>
+    </header>
+
+    {% block main %}
+    {% endblock main %}
+
+  </body>
+</html>

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %} {{ block.super }} | product details {% endblock title %}
+
+{% block main %}
+    <section id="main">
+          <p class="name">{{ product.name|title }}</p>
+          <p class="description">{{ product.description }}</p>
+          <p class="ages">Appropriate for {{product.age_range|lower}}</p>
+          <p class="pricex">${{ product.price }}</p>
+          <p class="image">
+            {% if product.image %}
+              {% if product.image.url.width > product.image.url.height %}
+                <img src="{{ product.image.url }}" width=100>
+              {% else %}
+                <img src="{{ product.image.url }}" height=100>
+              {% endif %}
+            {% endif %}
+          </p>
+          <div>
+              {% if product.review_set %}
+                  <p> Reviews <p>
+                      <ol>
+                          {% for review in product.review_set.all %}
+                              <li> ({{review.stars}} stars) {{review.description}} - by {{review.user}}
+                          {% endfor %}
+                      </ol>
+              {% endif %}
+          </div>
+          <p>
+              <a href="{% url 'review' product.id %}"> Write a review </a>
+          </p>
+    </section>
+
+<section>
+<p>Back to product <a href="{% url 'index' %}">index</a>
+</section>
+
+{% endblock main %}
